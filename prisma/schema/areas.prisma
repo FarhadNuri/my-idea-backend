@@ -1,0 +1,10 @@
+model Area {
+  id   String @id @default(uuid())
+  name String
+  city String
+  lat  Float
+  lng  Float
+
+  @@unique([name, city])
+}
+
