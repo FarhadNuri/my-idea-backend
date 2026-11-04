@@ -1,0 +1,31 @@
+model Chamber {
+  id       String  @id @default(uuid())
+  doctorId String
+  name     String
+  address  String
+  city     String
+  area     String
+  lat      Float
+  lng      Float
+  phone    String?
+  fee      Int
+  isActive Boolean @default(true)
+
+  doctor    Doctor            @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  schedules ChamberSchedule[]
+
+  @@index([doctorId])
+  @@index([lat, lng])
+}
+
+model ChamberSchedule {
+  id        String  @id @default(uuid())
+  chamberId String
+  day       Weekday
+  startTime String // "17:00"
+  endTime   String // "21:00"
+  chamber   Chamber @relation(fields: [chamberId], references: [id], onDelete: Cascade)
+
+  @@unique([chamberId, day])
+}
+
