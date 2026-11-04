@@ -1,0 +1,22 @@
+enum Role {
+  USER
+  DOCTOR
+  ADMIN
+}
+
+enum DoctorStatus {
+  PENDING
+  VERIFIED
+  REJECTED
+}
+
+enum Weekday {
+  SAT
+  SUN
+  MON
+  TUE
+  WED
+  THU
+  FRI
+}
+
