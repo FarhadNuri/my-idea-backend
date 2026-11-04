@@ -1,0 +1,10 @@
+model Disease {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  aliases     String[] // store in lowercase
+  specialtyId String
+  specialty   Specialty @relation(fields: [specialtyId], references: [id])
+
+  @@index([specialtyId])
+}
+
