@@ -1,0 +1,26 @@
+model Specialty {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  diseases Disease[]
+  doctors  Doctor[]
+}
+
+model Doctor {
+  id              String       @id @default(uuid())
+  userId          String       @unique
+  specialtyId     String
+  bmdcNumber      String       @unique
+  degrees         String[]
+  experienceYears Int          @default(0)
+  bio             String?
+  status          DoctorStatus @default(PENDING)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  specialty Specialty @relation(fields: [specialtyId], references: [id])
+  chambers  Chamber[]
+
+  @@index([specialtyId, status])
+}
+

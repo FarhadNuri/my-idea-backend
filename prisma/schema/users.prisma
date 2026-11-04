@@ -1,0 +1,25 @@
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  phone        String?  @unique
+  passwordHash String
+  role         Role     @default(USER)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  profile UserProfile?
+  doctor  Doctor?
+}
+
+model UserProfile {
+  id     String  @id @default(uuid())
+  userId String  @unique
+  city   String?
+  area   String?
+  lat    Float?
+  lng    Float?
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
